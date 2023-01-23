@@ -16,6 +16,15 @@ export default function TextForm(props) {
     const handleClearText = (event) => {
         setText("");
     }
+    const handleCopyText = (event) => {
+        let text =  document.getElementById("mybox");
+        text.select();
+        navigator.clipboard.writeText(text.value);
+    }
+    const handleExtraSpaces =()=>{
+        let newText = text.split(/[ ]+/);
+        setText(newText.join(" "));
+    }
 
     //States
     const [text, setText] = React.useState("Enter Text here");
@@ -25,11 +34,14 @@ export default function TextForm(props) {
             <div className="container">
                 <h1>{props.heading}</h1>
                 <div className="mb-3">
-                    <textarea className="form-control" value={text} onChange={handleOnChange} id="exampleFormControlTextarea1" rows="8"></textarea>
+                    <textarea className="form-control" value={text} onChange={handleOnChange} id="mybox" rows="8"></textarea>
                 </div>
-                <button className='btn btn-primary' onClick={handleToUppercase}>Convert to UpperCase</button>
-                <button className='btn btn-primary mx-2' onClick={handleToLowercase}>Convert to LowerCase</button>
-                <button className='btn btn-primary mx-2' onClick={handleClearText}>Clear Text</button>
+                <button className='btn btn-primary mx-1' onClick={handleToUppercase}>Convert to UpperCase</button>
+                <button className='btn btn-primary mx-1' onClick={handleToLowercase}>Convert to LowerCase</button>
+                <button className='btn btn-primary mx-1' onClick={handleClearText}>Clear Text</button>
+                <button className='btn btn-primary mx-1' onClick={handleCopyText}>Clear Text</button>
+                <button className='btn btn-primary mx-1' onClick={handleExtraSpaces}>Remove Spaces</button>
+
             </div>
             <div className="container my-2">
                 <h2>Your Text Summary</h2>
